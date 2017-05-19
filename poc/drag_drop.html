@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Drag and Drop</title>
+	<link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+	<style type="text/css">
+		.drop-area {
+			height: 400px;
+			width: 50%;
+			float: left
+		}
+		.drag-area {
+			height: 400px;
+			width: 50%;
+			border: 1px solid blue;
+			float: left;
+		}
+		input {
+			cursor: move;
+		}
+		.box {
+			width: 50px;
+			height: 50px;
+		}
+		.box:focus {
+			border: 1px solid
+		}
+		#label1 {
+			border: 1px solid;
+			width: 100px;
+			height: 100px;
+		}
+		
+	</style>
+	<script  src="https://code.jquery.com/jquery-3.1.1.min.js"  integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8=" crossorigin="nymous"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+	<script type="text/javascript" src="scripts/jquery.ui.js"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.6/angular.min.js"></script>
+	<script>
+	$( function() {
+		$( "#i1,#i2,#i3,#i4,#i5,#box,#drag1,#label1" ).draggable();
+	} );
+	</script>
+</head>
+<body >
+
+<div id="h1" class="drag-area">
+ <div>
+ <input type="text" name="" id="i1" draggable="true" ondragstart="dragStart(event);"  /></div> 
+ <div>
+ <input type="text" name="" id="i2" draggable="true" ondragstart="dragStart(event);"  /></div> 
+ <div>
+ <input type="text" name="" id="i3" draggable="true" ondragstart="dragStart(event);"  /></div> 
+ <div>
+ <input type="text" name="" id="i4" draggable="true" ondragstart="dragStart(event);"  /></div> 
+ <div>
+ <input type="text" name="" id="i5" draggable="true" ondragstart="dragStart(event);"  /></div> 
+<br>
+<div class="box" id="box" draggable="true" ondragstart="dragStart(event);" >
+	Darg
+</div>
+<img id="drag1" src="Koala.jpg" draggable="true" ondragstart="dragStart(event)" width="336" height="69">
+<div id="label1" draggable="true" ondragstart="dragStart(event)">
+	label
+</div>
+</div>
+<div class="drop-area" ondrop="drop_handler(event)" ondragover="dragover_handler(event)"  >
+</div>
+<button draggable="true" onclick="buttonDrag(event)">click</button>
+<script type="text/javascript">
+var element;
+	function dragStart(event) {
+		event.dataTransfer.setData("text/html", event.target.id);
+		element=event.target.id
+	}
+
+	function dragover_handler(event) {
+		 event.preventDefault();
+		 var data = event.dataTransfer.getData("text/html");
+		  var data = element;
+		 $("#"+data).css("left", event.clientX);
+		$("#"+data).css("top", event.clientY);
+		$("#"+data).css("position", "absolute");
+		// event.target.appendChild(document.getElementById(data));
+	}
+
+	function drop_handler(event) {
+		 event.preventDefault();
+		 // Get the id of the target and add the moved element to the target's DOM
+		//  var data = event.dataTransfer.getData("text/html");
+		//  $("#"+data).css("left", event.pageX);
+		// $("#"+data).css("top", event.pageY);
+		// $("#"+data).css("position", "fixed");
+		//  event.target.appendChild(document.getElementById(data));
+		//  console.log(data)
+		 element='';
+	}
+
+	function dragEnter(event) {
+		 event.preventDefault();
+		 var data = event.dataTransfer.getData("text/html");
+	}
+
+	function dragEnd(event) {
+		console.log(event.pageX, event.pageY)
+	}
+
+	function drag(event) {
+		 var data = event.dataTransfer.getData("text/html");
+	}
+	function buttonDrag(event) {
+	}
+
+</script>
+</body>
+</html>
